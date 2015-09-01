@@ -4,33 +4,37 @@
 
 char* main(int argc, char*str)
 {
-
-  int pid = fork();
+  pid_t  pid;
+  pid_t  pid2;
   int num = 0;
-
  
-  if (pid<0){
-   printf("fork error");
-  }else if (pid == 0) {    //child1
-
-    while(1){
  
-    printf("Child: %d\n ", num);
-        num++;
+  if (pid = fork()){
+    if(pid2 = fork()){
+
+      while(1){
+
+          printf("Parent: "); 
+	  printf("%d\n", num);
+	  num++;
+      }
     }
-  }else if (pid == 1) {    //child
- 
-     printf("Child2: ");
-      printf("%d\n",num);
-        num++;
+    else{
+      while(1){
+          printf("Child2: %d\n ", num);
+	  num++;
+      }
+    }
   }
-  
-  else {   //parent
-     
-     printf("Parent: "); 
-     printf("%d\n", num);
-    num++;
-  
-
-  }
+ else{
+   while(1){
+       printf("Child1: %d\n ", num);
+       num++;
+     }
+ }
 }
+
+
+
+
+ 
