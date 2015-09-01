@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+char* main(int argc, char*str)
+{
+
+  int num = 0;
+  pid_t pid;
+
+  if ((pid = fork())<0){
+    err_sys("fork error");
+  }else if (pid == 0) {    //child
+    int num ++;
+    printf("%d",num);
+  }
+  else {   //parent
+    int num ++;
+    printf("%d", num);
+  }
+
+
+}
