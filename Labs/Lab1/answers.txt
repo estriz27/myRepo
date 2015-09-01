@@ -1,0 +1,5 @@
+Elias Strizower
+Lab 1
+
+
+1. There exists two instances of num, one in the memory space of the child and one in the memory space of the parent. This is because the fork() function gives the child its own memory space, also when printed the parent and child have two different values for num.
