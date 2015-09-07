@@ -1,0 +1,12 @@
+Elias Strizower
+CSCI 315
+Lab 1
+9/7/15
+
+
+
+Problem 1: Completed to specification.
+
+Problem 2: Completed to specification, though it prints the first 5 characters of data.txt twice, next to eachother. I'm not sure if it was supposed to do that. One print was from the first child, and the other was from the second.
+
+Problem 3: Completed to specification.
