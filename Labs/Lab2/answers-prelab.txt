@@ -1,0 +1,8 @@
+Elias Strizower
+Prelab 2 Answers
+
+1.A child copies the data from the parent heap. After it is copied they are two different spaces in memory, so modifying the heap of a respective process doesn't change the heap of the other.
+
+2. The pipe connects the two processes together, one is writing and the other is reading from the same file. After the pipe is created either the parent of child can access it in any order.
+
+3. The difference between a file and a pipe is the pipe is unidirectional, as opposed to how a file is not. So a parent and child can both read and write to a file, but they cannot do that for a pipe.
