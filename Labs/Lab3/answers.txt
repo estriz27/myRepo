@@ -1,5 +1,15 @@
 Elias Strizower
 Lab 3 answers.txt
 
+Problem 2:
 2. In order to link the pow function, the linker "-lm" had to be added to the call to the compiler.
 3. Undefined references to "pthread_create" and "pthread_join"
+
+Problem 3:
+1. The arguments are passed to the other threads using pthread_create. The arguemnts are stored in a struct of thread arguments called targs.
+2.calloc() allocates memory for an array of elements with a specified size and calculates the size of memory needed, and returns a pointer to the allocated memory. In this situation it is prefereable to use calloc() over malloc() because it requires the user to do less work (the user doesn't need to computer the size of the array) and it initialized the memory allocated to 0.
+3. A detached thread is one that when it is completed it returns its memory to the system and  is unable to be joined by another thread.
+4. The main thread receives output from other threads by joining them together using 
+pthread_join.
+5.The exit(3) exits the thread and the process. This stops the return of the value to the parent process and the creation of further child processes.
+6. Calling execl terminated the threads and prints out the contents of the working directory. After execl is called the main function is terminated. Execl terminated the program after the first thread calls it, so it is not called by all the threads that are supposed to be created. 
