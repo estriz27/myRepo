@@ -1,0 +1,5 @@
+Elias Strizower
+Lab 3 answers.txt
+
+2. In order to link the pow function, the linker "-lm" had to be added to the call to the compiler.
+3. Undefined references to "pthread_create" and "pthread_join"
