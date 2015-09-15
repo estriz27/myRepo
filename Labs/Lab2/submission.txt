@@ -1,0 +1,9 @@
+Elias Strizower
+CSCI315 Lab 2
+9/14/15
+
+Problem 1: Works to specification
+Problem 2: Works to specification
+Problem 3: Works to specification
+Problem 4: Works to specification
+
