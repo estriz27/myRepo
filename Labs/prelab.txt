@@ -1,0 +1,5 @@
+Elias Strizower
+Prelab 3 
+
+1. Yes, the order of the numbers matches the order that they were created.
+2. Yes, they are going in a predictable order, thread one thread two and then thread 3.
