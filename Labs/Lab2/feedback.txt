@@ -1,0 +1,22 @@
+------------------------------------------------------------
+Lab2 feedback for Strizower, Elias B. (ebs021)
+------------------------------------------------------------
+prelab: Score from prelab (checked in lab)
+	Score: 30 / 30
+	Comment: Good
+lab2 problem 1): pipes.c sends a message one char at a time, child reads one at a time until EOF and Pipe, Read, and Write are wrapped.
+	Score: 29 / 30
+	Comment: Your Write function should exit on error. As it is, the program will continue to execute.
+lab2 problem 2): Two pipes parent writes, child reads uppercases and writes back to parent, parent reads and prints
+	Score: 15 / 15
+	Comment: Good
+lab2 problem 3): Parent sends lines to child, child tokenizes and returns a string containing the tokens.
+	Score: 15 / 15
+	Comment: Good
+lab2 problem 4): Provide a Makefile to build all the programs in problems 1, 2 and 3.
+	Score: 0 / 10
+	Comment: No makefile.
+------------------------------------------------------------
+TOTAL 89.0 / 100
+------------------------------------------------------------
+
