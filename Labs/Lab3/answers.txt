@@ -13,3 +13,8 @@ Problem 3:
 pthread_join.
 5.The exit(3) exits the thread and the process. This stops the return of the value to the parent process and the creation of further child processes.
 6. Calling execl terminated the threads and prints out the contents of the working directory. After execl is called the main function is terminated. Execl terminated the program after the first thread calls it, so it is not called by all the threads that are supposed to be created. 
+
+Problem 5:
+1. No you cannot guarantee that the date printed is always the termination time of the current thread. Some of the threads may wait for each other to terminate.
+
+2. You can flush stdout so that the printf works immediately.
