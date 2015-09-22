@@ -1,0 +1,12 @@
+Elias Strizower
+Submission Lab3
+
+Problem 1 is working correctly
+Problem 2 is working correcly
+I think problem 3 is working correctly. It defintiely was when I 
+committed it, but there was an issue with my git at some point
+becuase I tried to commit locally and it may have pushed the wrong
+summation.c file at some point. I will speak to Professor Marchiori tomorrow
+to help me fix my local git repository.
+Problem 4 is working correctly
+Problem 5 is working correctly 
