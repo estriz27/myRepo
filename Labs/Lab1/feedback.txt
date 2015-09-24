@@ -38,7 +38,7 @@ lab1 problem 2 c): fork-file.c compiles and writes and reads 5 characters
 
 lab1 problem 2 d): Answers to the following questions: (1) if one process closes the file, can
 the other still read from it?; (2) say the child process reads from the
-?inherited? file; does that affect what the parent will read from the same
+“inherited” file; does that affect what the parent will read from the same
 file descriptor?
 	Score: 4 / 6
 	Comment: When using system calls, a read in one process does affect the read position of the other process.
