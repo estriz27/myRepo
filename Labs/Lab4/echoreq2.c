@@ -54,10 +54,14 @@ main(int argc, char* argv[]) {
 
 	struct	hostent	 *ptrh;	 // pointer to a host table entry	
 	struct	sockaddr_in sad; // structure to hold an IP address	
+	struct addrinfo hints, *res;
+	int error;
+
 
 	int	sd;		                 // socket descriptor			
-	int	port;		               // protocol port number		
-	char *host;                // pointer to host name		
+	char *port;		               // protocol port number		
+	char *host;                // pointer to host name	
+	char *serv; 				//pointer to server name	
 	char  in_msg[BUFFER_SIZE]; // buffer for incoming message
 
 	int ret_val;
@@ -74,7 +78,7 @@ main(int argc, char* argv[]) {
 	}
 
 	host = argv[1];		
-	port = atoi(argv[2]);	
+	port = (argv[2]);	
 
 	if (port > 0)	
 		// test for legal value		
@@ -87,18 +91,26 @@ main(int argc, char* argv[]) {
 
 	// convert host name to equivalent IP address and copy to sad 
 
-	ptrh = gethostbyname(host);
+	
+	hints.ai_family = AF_INET;
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_protocol = IPPROTO_TCP;
+	hints.ai_flags = 0;
 
-	if ( ((char *)ptrh) == NULL ) {
+
+	memset(&hints, 0 , sizeof(struct addrinfo));
+
+	if (error < 0 ) {
 		printf("ECHOREQ: invalid host: %s\n", host);
 		exit(-1);
 	}
 
-	memcpy(&sad.sin_addr, ptrh->h_addr, ptrh->h_length);
+	//memcpy(&sad.sin_addr, res, len(res));
 
 	// create socket 
+	error = getaddrinfo(host, port, &hints, &res);
 
-	sd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+	sd = socket(res->ai_family, res->ai_socktype,res->ai_protocol);
 	if (sd < 0) {
 		printf("ECHOREQ: socket creation failed\n");
 		exit(-1);
@@ -106,14 +118,14 @@ main(int argc, char* argv[]) {
 
 	// connect the socket to the specified server 
 
-	if (connect(sd, (struct sockaddr *)&sad, sizeof(sad)) < 0) {
+	if (connect(sd, res->ai_addr, res->ai_addrlen) < 0) {
 		perror("ECHOREQ: connect failed");
 		exit(-1);
 	}
 
 
 	// send message to server
-	Write(sd, in_msg, BUFFER_SIZE);
+	Write(sd, in_msg, strlen(in_msg)+1);
 
 
 	// receive message echoed back by server

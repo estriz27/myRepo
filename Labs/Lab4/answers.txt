@@ -1,0 +1,13 @@
+Elias Strizower
+Lab 4 answers.txt
+
+1. Although no forks were made, it is clear that the processes have the ability to send data to eachother, as demonstrated in echod.c and echoreq.c.
+
+2. Socket functionality is provided by an external library. This is justified by the include statement for the external library <sys/socket.h>. Without this import statment, the use of sockets wouldn't be possible. The functions in the library make calls to the kernel.
+
+3. The main difference when chosing whether to use pipes or sockets depends on if the program needs the ability to communicate over a network, or whether it will communicate with local procesess. If it has to communicate over a network, it would make sense to use sockets instead of pipes. If it only needs to communicate with processes that are local, pipes will do the job.
+
+4. gethostbyname(3) returns a pointer of an internet host that describes it either by its name or address. echoreq.c uses this in the line "ptrh = gethostbyname(host);"
+which stores the pointer to host in the variable ptrh, which is a hostent type struct pointer to a host table entry.
+
+5. The alternative method is getaddressinfo. This is different than gethostname because it has more functionality, such as its ability to work like getservbyname as well.
