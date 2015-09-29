@@ -1,0 +1,11 @@
+Elias Strizower
+CSCI 315 Prelab 5 
+1. The difference between a semaphore and mutex is that a mutex is used for code that cannot be executed concurrently. Becuase of this, mutex can only let one process execute a specific section of code at a time. Unlike mutex, a semaphore can grant permission to X processes to execute a section of code for up to X availabilities. In essenence, a mutex is a semaphore with a value of 1.
+
+
+pthread_mutex_init  - this creates a new mutex with a specified attribute
+pthread_mutex_lock - this locks a mutex. If the mutex is already locked this will block until the mutex is available.
+pthread_mutex_unlock - this unlocks a mutex.
+sem_init(3) - this initializes a semaphore with the address pointed to by sem.
+sem_wait - this will block until the lock is acquired. If the semaphore is already locked then this will fail.
+sem_post - this increments the value of the semaphore, and awakens all of the threads that are waiting on the semaphore.
