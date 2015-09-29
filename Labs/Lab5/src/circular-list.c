@@ -32,33 +32,41 @@ int circular_list_create(struct circular_list *l, int size) {
 }
 
 int circular_list_insert(struct circular_list *l, item i) {
-  if (i){
-  	if(l->size > 0){
-  		for(int x = 0; x < l->size; x++){
-  			l->buffer[x+1] = l->buffer[x];
-  		}
-  		l->buffer[0] = i;
-  	}
-  	else{
-  		l->buffer[0] = i;
-  	}
-  	l->elems +=1;
+  //if elems < size.   l->buffer[elems]%size 
+  //move start when remove
+  //move end when you insert, if there is space, or return error
+  if (l->elems >= l->size){
+      printf("Error, list is full\n");
+      return -1;
+    }
+  if(l->elems == 0){
+    l->start = 0;
+    l->end = 0;
+    l->buffer[0] = i;
+    l->elems +=1;
+
   }
+  else{
+    l->end = ((l->end +1)%l->size);
+    l->buffer[l->end] = i;
+    l->elems+=1;
+  } 
+  printf("end is %d\n", l->end);
   return 0;
+
 }
 
 int circular_list_remove(struct circular_list *l, item *i) {
-	if(l->size >0){
-		i = &l->buffer[l->start];
-		for(int y = 0; y<l->size -1; y++){
-			l->buffer[y] = l->buffer[y+1];
+  printf("start is %d\n", l->start);
+	if(l->elems > 0){
+		*i = l->buffer[l->start];
+    l->start= ((l->start +1)%l->size);
+    l->elems -=1;
 		}
-		printf("%f",*i);
-	}
+		
 	else{
-		i = &l->buffer[l->start];
+		printf("Error, list is empty\n");
+    return(-1);
 	}
-	l->size -=1;
-
   return 0;
 }
