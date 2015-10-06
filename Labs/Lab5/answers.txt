@@ -9,3 +9,8 @@ pthread_mutex_unlock - this unlocks a mutex.
 sem_init(3) - this initializes a semaphore with the address pointed to by sem.
 sem_wait - this will block until the lock is acquired. If the semaphore is already locked then this will fail.
 sem_post - this increments the value of the semaphore, and awakens all of the threads that are waiting on the semaphore.
+
+
+Lab 5
+
+rand_r has the same capabilities of the rand function, though it is thread safe because it when called a pointer to the return must be provided. This makes it safe for the function to be called by multiple threads, as long as different calls operate on different data. It also only modifies the state of the arguments provided in the call, unlike how rand modifies the state of a global variable.

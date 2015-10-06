@@ -39,9 +39,18 @@ int circular_list_create(struct circular_list *l, int size) {
   l->size = size;
 
   //initialize semaphores and mutex
- // pthread_mutex_init(&mutex, NULL);
-  sem_init(&empty, 1, l->size);
-  sem_init(&full, 1, 0);
+  pthread_mutex_init(&mutex, NULL);
+
+
+  if(sem_init(&empty, 0, l->size)<0){
+    perror("Sem init empty fail");
+    exit(-1);
+  }
+
+  if(sem_init(&full, 0, 0)<0){
+    perror("Sem init full fail");
+    exit(-1);
+  }
 
 
   return 0;
@@ -51,11 +60,13 @@ int circular_list_insert(struct circular_list *l, item i) {
   //if elems < size.   l->buffer[elems]%size 
   //move start when remove
   //move end when you insert, if there is space, or return error
-  pthread_mutex_lock(&mutex);
   sem_wait(&empty);
+  pthread_mutex_lock(&mutex);
+  
 
     if (l->elems >= l->size){
         printf("Error, list is full\n");
+        pthread_mutex_unlock(&mutex);
         return -1;
       }
     if(l->elems == 0){
@@ -63,28 +74,29 @@ int circular_list_insert(struct circular_list *l, item i) {
       l->end = 0;
       l->buffer[0] = i;
       l->elems +=1;
+      printf("INSERT 1\n");
 
     }
     else{
       l->end = ((l->end +1)%l->size);
       l->buffer[l->end] = i;
       l->elems+=1;
+      printf("INSERT 2\n");
     } 
-   
-    pthread_mutex_unlock(&mutex);
+
     sem_post(&full);
+    pthread_mutex_unlock(&mutex);
+    
 
     return 0;
-
-    
-    
-  
-
 }
 
 int circular_list_remove(struct circular_list *l, item *i) {
-  pthread_mutex_lock(&mutex);
-  sem_wait(&full);
+  if(sem_wait(&full)<0){
+    perror("Remove failed");
+    exit(-1);
+  }
+  pthread_mutex_lock(&mutex); 
 	if(l->elems > 0){
 		*i = l->buffer[l->start];
     l->start= ((l->start +1)%l->size);
@@ -93,6 +105,7 @@ int circular_list_remove(struct circular_list *l, item *i) {
 		
 	else{
 		printf("Error, list is empty\n");
+    pthread_mutex_unlock(&mutex);
     return(-1);
 	}
   pthread_mutex_unlock(&mutex);

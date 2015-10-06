@@ -51,16 +51,18 @@ int baseseed = 1738;
 void *producer (void *param) {
   item i;
   unsigned int seed = *((int *) param);
-
+  int randSeed = rand_r(&seed);
+  printf("randSeed = %d\n", randSeed);
   while (true) {
-    int randSeed = rand_r(&seed);
-    printf("randSeed = %d\n", randSeed);
+    
+    
     
     // sleep for random period of time
+    printf("producer going to sleep\n");
     usleep(SCALE_FACTOR * randSeed / RAND_MAX); 
+    printf("producer waking up\n");
 
     randSeed = rand_r(&seed);
-    printf("randSeed = %d\n", randSeed);
     
     // generate a random number
     i = (item) (((double) randSeed) / RAND_MAX);
@@ -78,12 +80,13 @@ void *producer (void *param) {
 void *consumer (void *param) {
   item i;
   unsigned int seed = *((int *) param);
-
+  int randSeed = rand_r(&seed);
+  printf("randSeed = %d\n", randSeed);
 
   while (true) {
     // sleep for random period of time
-    int randSeed = rand_r(&seed);
-    printf("randSeed = %d\n", randSeed);
+    
+    
     usleep(SCALE_FACTOR * rand_r(&seed) / RAND_MAX);
 
     if (circular_list_remove(&mylist, &i) == -1) {
@@ -99,7 +102,7 @@ int main (int argc, char *argv[]) {
 //declare command line arguments
 int num_prod;
 int num_cons;
-int sltme;
+float sltme;
 
     //check for all command line arguments
   if(argc< 4){
@@ -111,7 +114,7 @@ int sltme;
   // get command line arguments
   num_prod = atoi(argv[1]);   //# of producer threads
   num_cons = atoi(argv[2]);   //# of consumer threads
-  sltme = atoi(argv[3]);  //sleep time
+  sltme = atof(argv[3]);  //sleep time
 
 
   //declare thread variables
@@ -146,7 +149,8 @@ int sltme;
     }
   }
   // sleep to give time for threads to run
-  usleep(sltme);
+  usleep(sltme* 1000000);
+  printf("Exiting\n");
   
   // exit
   return (0);
