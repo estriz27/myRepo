@@ -20,6 +20,16 @@
 #include <stdlib.h>
 #include "circular-list.h" 
 #include <stdio.h>
+#include <sys/sem.h>
+#include <semaphore.h>
+#include <pthread.h>
+
+
+
+//use mutex in pthreads library
+pthread_mutex_t mutex;
+sem_t empty;
+sem_t full;
 
 int circular_list_create(struct circular_list *l, int size) {
   l->buffer = calloc(size, sizeof(item));
@@ -28,6 +38,12 @@ int circular_list_create(struct circular_list *l, int size) {
   l->elems = 0;
   l->size = size;
 
+  //initialize semaphores and mutex
+ // pthread_mutex_init(&mutex, NULL);
+  sem_init(&empty, 1, l->size);
+  sem_init(&full, 1, 0);
+
+
   return 0;
 }
 
@@ -35,29 +51,40 @@ int circular_list_insert(struct circular_list *l, item i) {
   //if elems < size.   l->buffer[elems]%size 
   //move start when remove
   //move end when you insert, if there is space, or return error
-  if (l->elems >= l->size){
-      printf("Error, list is full\n");
-      return -1;
-    }
-  if(l->elems == 0){
-    l->start = 0;
-    l->end = 0;
-    l->buffer[0] = i;
-    l->elems +=1;
+  pthread_mutex_lock(&mutex);
+  sem_wait(&empty);
 
-  }
-  else{
-    l->end = ((l->end +1)%l->size);
-    l->buffer[l->end] = i;
-    l->elems+=1;
-  } 
-  printf("end is %d\n", l->end);
-  return 0;
+    if (l->elems >= l->size){
+        printf("Error, list is full\n");
+        return -1;
+      }
+    if(l->elems == 0){
+      l->start = 0;
+      l->end = 0;
+      l->buffer[0] = i;
+      l->elems +=1;
+
+    }
+    else{
+      l->end = ((l->end +1)%l->size);
+      l->buffer[l->end] = i;
+      l->elems+=1;
+    } 
+   
+    pthread_mutex_unlock(&mutex);
+    sem_post(&full);
+
+    return 0;
+
+    
+    
+  
 
 }
 
 int circular_list_remove(struct circular_list *l, item *i) {
-  printf("start is %d\n", l->start);
+  pthread_mutex_lock(&mutex);
+  sem_wait(&full);
 	if(l->elems > 0){
 		*i = l->buffer[l->start];
     l->start= ((l->start +1)%l->size);
@@ -68,5 +95,7 @@ int circular_list_remove(struct circular_list *l, item *i) {
 		printf("Error, list is empty\n");
     return(-1);
 	}
+  pthread_mutex_unlock(&mutex);
+  sem_post(&empty);
   return 0;
 }

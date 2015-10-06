@@ -29,7 +29,7 @@ BIN = ./bin
 vpath %.h ./include
 vpath %.c ./src
 
-EXECS =	prodcons
+EXECS =	prodcons adt-test
 
 all: $(EXECS)
 
@@ -42,11 +42,9 @@ $(OBJ)/circular-list.o: $(INC)/circular-list.h $(SRC)/circular-list.c
 prodcons: $(OBJ)/circular-list.o
 	$(CC) $(CFLAGS) $(SRC)/prodcons.c $(OBJ)/circular-list.o -o $(BIN)/prodcons -lpthread
 
-$(OBJ)/adt-test.o: $(SRC)/adt-test.c
-	$(CC) $(CFLAGS -c $(SRC)/adt-test.c -o $(OBJ)/adt-test.o
 
-adt-test: $(OBJ)/adt-test.o
-	$(CC) $(CFLAGS) $(OBJ)/adt-test.o -o $(BIN)/adt-test -lpthread
+adt-test: $(SRC)/adt-test.c $(OBJ)/circular-list.o
+	$(CC) $(CFLAGS) $(SRC)/adt-test.c -o $(BIN)/adt-test -lpthread
 
 .PHONY: clean
 clean:

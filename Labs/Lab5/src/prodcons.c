@@ -21,7 +21,9 @@
 #include <stdio.h>
 #include <stdbool.h> 
 #include <unistd.h>
-
+#include <pthread.h>
+#include <sys/sem.h>
+#include <semaphore.h>
 #include "circular-list.h" 
 
 /* SCALE_FACTOR is a constant for you to experiment with:
@@ -42,19 +44,26 @@
 // global variables -----------------------
 
 struct circular_list mylist;
+int baseseed = 1738;
 
 // end of global variables ----------------
 
 void *producer (void *param) {
   item i;
-  unsigned int seed = 1234;
+  unsigned int seed = *((int *) param);
 
   while (true) {
+    int randSeed = rand_r(&seed);
+    printf("randSeed = %d\n", randSeed);
+    
     // sleep for random period of time
-    usleep(SCALE_FACTOR * rand_r(&seed) / RAND_MAX); 
+    usleep(SCALE_FACTOR * randSeed / RAND_MAX); 
+
+    randSeed = rand_r(&seed);
+    printf("randSeed = %d\n", randSeed);
     
     // generate a random number
-    i = (item) (((double) rand_r(&seed)) / RAND_MAX);
+    i = (item) (((double) randSeed) / RAND_MAX);
 
     if (circular_list_insert(&mylist, i) == -1) {
       printf("PRODUCER: error condition\n");
@@ -62,14 +71,19 @@ void *producer (void *param) {
       printf("PRODUCER: produced value %lf\n", i);
     }
   }
+  
+  
 }
 
 void *consumer (void *param) {
   item i;
-  unsigned int seed = 999;
+  unsigned int seed = *((int *) param);
+
 
   while (true) {
     // sleep for random period of time
+    int randSeed = rand_r(&seed);
+    printf("randSeed = %d\n", randSeed);
     usleep(SCALE_FACTOR * rand_r(&seed) / RAND_MAX);
 
     if (circular_list_remove(&mylist, &i) == -1) {
@@ -78,23 +92,61 @@ void *consumer (void *param) {
       printf("CONSUMER: consumed value %lf\n", i);
     }
   }
+
 }
 
 int main (int argc, char *argv[]) {
+//declare command line arguments
+int num_prod;
+int num_cons;
+int sltme;
+
+    //check for all command line arguments
+  if(argc< 4){
+    printf("Missing Command Line Argument");
+    exit(-1);
+  }
+
 
   // get command line arguments
-  
-  // if error in command line argument usage, terminate with helpful
-  // message
-  
+  num_prod = atoi(argv[1]);   //# of producer threads
+  num_cons = atoi(argv[2]);   //# of consumer threads
+  sltme = atoi(argv[3]);  //sleep time
+
+
+  //declare thread variables
+
+  pthread_t *tidprod;
+  pthread_t *tidcons;
+
+  tidprod = (pthread_t *)calloc(num_prod, sizeof(pthread_t));
+  tidcons = (pthread_t *)calloc(num_cons, sizeof(pthread_t));
+
   // initialize buffer
   circular_list_create(&mylist, 20);
-  
+
   // create producer thread(s)
-  
+  for( int i = 0; i< num_prod; ++i){
+      int *seed = malloc(sizeof(int));
+      *seed = baseseed + i;
+     int error = pthread_create(&tidprod[i], NULL, producer, (void *) seed);
+     if(error){
+      printf("Error creating threads");
+      exit(-1);
+     }
+  }
   // create consumer thread(s)
-  
+ for( int i = 0; i< num_cons; ++i){
+     int *seed = malloc(sizeof(int));
+     *seed = baseseed +i;
+     int error = pthread_create(&tidcons[i],NULL, consumer, (void *) seed);
+     if(error){
+      printf("Error creating threads");
+      exit(-1);
+    }
+  }
   // sleep to give time for threads to run
+  usleep(sltme);
   
   // exit
   return (0);
