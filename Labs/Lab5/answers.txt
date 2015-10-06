@@ -1,5 +1,6 @@
 Elias Strizower
 CSCI 315 Prelab 5 
+
 1. The difference between a semaphore and mutex is that a mutex is used for code that cannot be executed concurrently. Becuase of this, mutex can only let one process execute a specific section of code at a time. Unlike mutex, a semaphore can grant permission to X processes to execute a section of code for up to X availabilities. In essenence, a mutex is a semaphore with a value of 1.
 
 
