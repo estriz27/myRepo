@@ -1,0 +1,53 @@
+------------------------------------------------------------
+Lab5 feedback for Strizower, Elias B. (ebs021)
+------------------------------------------------------------
+perlab1: In circular-list.c, flesh out the implementation of the functions for
+insertion and removal in the ADT. Create program src/adt-test.c, where you
+will write tests to call all the three functions in the ADT. The goal of this
+program is to exercise your implementation so that you can discover any bugs
+and, subsequently, correct them. Modify the Makefile given to you so that it
+compiles src/adt-test.c and places the executable in directory bin/.
+	Score: 13 / 20
+	Comment: Your make file was compiling the adt-test into an object file (-c flag) instead before compiling it to an executable. This is not correct and causes errors when trying to make. I've pushed the corrected make file. Also, it didn't compile once I fixed it.
+
+perlab2: 1. Describe succintly the difference between mutex and semaphore.
+  2. Write a couple of sentences to describe each of the six calls 
+    1. pthread_mutex_init
+    2. pthread_mutex_lock
+    3. pthread_mutex_unlock
+    4. sem_init(3)
+    5. sem_wait(3)
+    6. sem_post(3)
+	Score: 10 / 10
+	Comment: Great
+
+problem 2: flesh out the functions that model producer and consumer threads. Work with
+the code to verify that the numbers being generated to pass into usleep do
+look random – you will have to restructure calls to rand_r so that you can
+print the values to standard out for inspection.
+	Score: 10 / 10
+	Comment: Good
+
+problem 3: Create a file called answers.txt in which you explain why rand_r is thread
+safe.
+	Score: 10 / 10
+	Comment: Good
+
+problem 4: Circular_list_insert and circular_list_remove functions have the required
+synchronization.
+	Score: 30 / 30
+	Comment: Great
+
+problem 5: Finally, flesh out the main() function in prodcons.c to bring everything
+together. Your main() will read three command line parameters, all integers,
+provided as in the example below. If the user tries to invoke your program
+without these three parameters, your program should: (a) display a help
+message indicating the correct usage (hint: use the structure in the example
+below) and (b) exit with (-1) termination status.
+	Score: 20 / 20
+	Comment: Good
+
+------------------------------------------------------------
+TOTAL 93.0 / 100
+------------------------------------------------------------
+
