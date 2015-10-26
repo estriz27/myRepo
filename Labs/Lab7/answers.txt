@@ -11,3 +11,5 @@ This leads to deadlock because if a philosopher is waiting on a chopstick which 
 
 
 2.1 What I obeserved is that all deadlocks occured with the last 3 lines being one picking up chopsticks, followed by a hungry line, followed by another philosopher picking up chopsticks. This lead to deadlock because both philosophers were waiting for a chopstick that was being held by another philosopher.
+
+3.1 These solutions don't eliminate mututal exclusion, hold and wait, no preemtion, or circular wait. All of these can still be problems. The only thing that it does is to try to change the order in which chopsticks are taken to reduce the possibility of deadlock. It is still very possible for a philosopher to be waiting on a chopstick which is being used by someone else, who is also waiting on another philosopher.
