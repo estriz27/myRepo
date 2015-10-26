@@ -1,3 +1,7 @@
+Elias Strizower
+Lab 7
+CSCI 315
+
 1.1.  The program leads to deadlock.
 1.2. Reasons for deadlock in this situation include mutual exclusion. This is that only one philosopher can use a chopstick at a time. 
 Also, hold and wait. A philosopher will hold on to a chopstick and not put it down until it has received another one and eaten. 
@@ -6,25 +10,4 @@ Lastly circular wait.If a philosopher only has one chopstick, it will wait for a
 This leads to deadlock because if a philosopher is waiting on a chopstick which is being used by another philosopher who is waiting on another chopstick etc. they can all be waiting and deadlock will occur.
 
 
-...
-Philosopher 0 is thinking
-Philosopher 4 is hungry
-Philosopher 4 picking up chopstick 0
-Philosopher 1 is done eating
-Philosopher 0 is hungry
-Philosopher 1 putting down chopstick 2
-Philosopher 2 picking up chopstick 2
-Philosopher 2 is starting to eat
-Philosopher 1 putting down chopstick 1
-Philosopher 1 is thinking
-Philosopher 2 is done eating
-Philosopher 0 picking up chopstick 1
-Philosopher 2 putting down chopstick 3
-Philosopher 1 is hungry
-Philosopher 2 putting down chopstick 2
-Philosopher 2 is thinking
-Philosopher 1 picking up chopstick 2
-Philosopher 2 is hungry
-Philosopher 2 picking up chopstick 3
-
-What I obeserved is that all deadlocks occured with the last 3 lines being one picking up chopsticks, followed by a hungry line, followed by another philosopher picking up chopsticks. This lead to deadlock because both philosophers were waiting for a chopstick that was being held by another philosopher.
+2.1 What I obeserved is that all deadlocks occured with the last 3 lines being one picking up chopsticks, followed by a hungry line, followed by another philosopher picking up chopsticks. This lead to deadlock because both philosophers were waiting for a chopstick that was being held by another philosopher.
