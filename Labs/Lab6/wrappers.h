@@ -33,7 +33,7 @@ int Bind(int socket, const struct sockaddr *address, socklen_t addresslen);
 
 int Listen(int socket, int backlog);
 
-int Accept(int socket, struct sockaddr *restrict address, socklen_t *restrict addresslen);
+int Accept(int socket, struct sockaddr *address, socklen_t *addresslen);
 
 ssize_t Recvfrom(int socket, void *buffer, size_t length, int flags, struct sockaddr *address, socklen_t *address_len);
 

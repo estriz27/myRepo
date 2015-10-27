@@ -1,0 +1,26 @@
+Elias Strizower
+Lab 6
+
+
+Server has been contacted 1 time.
+Number of files not found is 0
+Number of file requests is 0
+Number of status requests served is 1
+Average length of file requests is 0
+
+
+After file request
+
+Server has been contacted 3 times.
+Number of files not found is 0
+Number of file requests is 1
+Number of status requests served is 2
+Average length of file requests is 11
+
+After file not found
+
+Server has been contacted 5 times.
+Number of files not found is 1
+Number of file requests is 2
+Number of status requests served is 3
+Average length of file requests is 10

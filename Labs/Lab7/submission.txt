@@ -1,0 +1,11 @@
+Elias Strizower
+Lab 7
+Submission.txt
+
+Problem 1 works to specification
+
+Problem 2 works to specification
+
+Problem 3-1 works to specification
+
+Problem 3-2 works to specification
