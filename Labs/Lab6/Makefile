@@ -1,7 +1,7 @@
 CC   = gcc
 CFLAGS = -g 
 LFLAGS = -lpthread
-ALL  = send_udp recv_udp getstats fileserver getfile
+ALL  = send_udp recv_udp ugetstats ufileserver ugetfile
 
 all : $(ALL)
 
@@ -11,14 +11,14 @@ recv_udp: recv_udp.c wrappers.o
 send_udp: send_udp.c wrappers.o
 	$(CC) $(CFLAGS) wrappers.o send_udp.c -o send_udp
 
-getfile: getfile.c wrappers.o readwrite.o
-	$(CC) $(CFLAGS) wrappers.o readwrite.o getfile.c -o getfile
+ugetfile: ugetfile.c wrappers.o readwrite.o
+	$(CC) $(CFLAGS) wrappers.o readwrite.o ugetfile.c -o ugetfile
 
-fileserver: fileserver.c wrappers.o readwrite.o
-	$(CC) $(CFLAGS) $(LFLAGS) wrappers.o fileserver.c readwrite.o -o fileserver 
+ufileserver: ufileserver.c wrappers.o readwrite.o
+	$(CC) $(CFLAGS) $(LFLAGS) wrappers.o ufileserver.c readwrite.o -o ufileserver 
 
-getstats: getstats.c wrappers.o readwrite.o
-	$(CC) $(CFLAGS) wrappers.o readwrite.o getstats.c -o getstats
+ugetstats: ugetstats.c wrappers.o readwrite.o
+	$(CC) $(CFLAGS) wrappers.o readwrite.o ugetstats.c -o ugetstats
 
 readwrite.o: readwrite.c readwrite.h
 	gcc -c readwrite.c -o readwrite.o

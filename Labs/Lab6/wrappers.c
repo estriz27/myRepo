@@ -106,7 +106,7 @@ int Read(int fd, void *buf, size_t count){
  	return(listenRet);
 
  }
- int Accept(int socket, struct sockaddr *restrict address, socklen_t *restrict addresslen){
+  int Accept(int socket, struct sockaddr *address, socklen_t *addresslen){
  	int acceptRet = accept(socket, address, addresslen);
  	if(acceptRet <0 ){
  		perror("Error binding");

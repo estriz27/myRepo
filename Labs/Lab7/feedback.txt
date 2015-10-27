@@ -1,0 +1,17 @@
+------------------------------------------------------------
+Lab7 feedback for Strizower, Elias B. (ebs021)
+------------------------------------------------------------
+Philosopher: Philosopher wakes up, calls napping with thread-safe random value, and prints
+status messages.
+	Score: 15 / 15
+	Comment: Good
+
+Main: Main creates 5 Philosopher threads and passes the correct id to each thread
+[0..4]; Makefile created that builds dp executable.
+	Score: 14 / 15
+	Comment: Good, but please remove compile warnings before submission.
+
+------------------------------------------------------------
+TOTAL 29.0 / 30
+------------------------------------------------------------
+

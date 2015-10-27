@@ -1,5 +1,5 @@
 //Elias Strizower
-//Lab 7 Problem 1
+//Lab 7 Problem 3-1
 
 #include <pthread.h>
 #include <stdio.h>
