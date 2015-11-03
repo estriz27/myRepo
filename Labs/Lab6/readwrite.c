@@ -4,6 +4,7 @@
 #include <sys/uio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "readwrite.h"
 
 ssize_t				
 readn(int fd, void *vptr, size_t n)

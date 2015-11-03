@@ -66,8 +66,9 @@ int main(int argc, char* argv[]) {
 
 	struct message { 
 	  char type; 
-	  int order = 0;
+	  int order;
 	} msgbuf;
+    msgbuf.order = 0;
 	
 	sem_init(&mySem,0,5);
 
