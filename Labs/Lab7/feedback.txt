@@ -12,6 +12,6 @@ Main: Main creates 5 Philosopher threads and passes the correct id to each threa
 	Comment: Good, but please remove compile warnings before submission.
 
 ------------------------------------------------------------
-TOTAL 29.0 / 30
+TOTAL 29.0 / 100
 ------------------------------------------------------------
 
