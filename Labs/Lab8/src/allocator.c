@@ -81,6 +81,7 @@ struct dnode* bestFit(struct dlist *l, size_t size){
 	struct dnode* node;
 	struct dnode* temp;
 	int currSize = INT_MAX;
+	printf("For loop started\n");
 	for(node = dlist_iter_begin(l); node!= NULL; node = dlist_iter_next(l)){
 		if (node->size > size && node->size < currSize){
 			temp = node;
@@ -88,10 +89,13 @@ struct dnode* bestFit(struct dlist *l, size_t size){
 		}
 
 	}
+	printf("For loop complete\n");
 		if (temp != NULL){
+			printf("returned temp\n");
 			return temp;
 		}
 		else{
+			printf("returning null\n");
 			return NULL;
 		}
 	}

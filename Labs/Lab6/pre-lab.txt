@@ -4,3 +4,7 @@ sendto - used to send a message from a socket. It specifies both the origin and 
 1.c 
 UDP and TCP sockets are different in the way they handle transmission of data. One of the major differences between working with UDP and TCP is that TCP sends data as a stream without distinguishing between the packets, while UDP sends data in packets.
 It is also easier to translate data back from packets using UDP, and it is a lot more work to determine the order of information fror TCP and piece them together in the wrong order.
+
+http://www.cyberciti.biz/faq/key-differences-between-tcp-and-udp-protocols/
+http://www.diffen.com/difference/TCP_vs_UDP
+

@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "wrappers.h"
 
 #define BUFFER_SIZE 512 // length of message buffer    
 #define	QLEN 6   // length of request queue
@@ -37,6 +38,7 @@
 #define FALSE 0
 
 int	num_requests = 0;  // tally of client requests
+int strlength; //Used as the string length of the cat string
 
 /*------------------------------------------------------------------------
  * Program:   echod - a server for echo requests
@@ -123,14 +125,28 @@ main (int argc, char* argv[]) {
 
 		if ( (sd2 = accept(sd, (struct sockaddr *)&cad, &alen)) < 0) {
 			perror("ECHOD: accept failed\n");
-			exit(-1);
-		}
+			exit(-1;)		}
 
 		num_requests++;
 
 		// receive the string sent by client
+		Read(sd2, in_msg, BUFFER_SIZE);
+		printf("%s\n", in_msg);
+
+		char *token;
+     	char tokenized[BUFFER_SIZE] = "";
+
+     	token = strtok(in_msg, " ");
+
+	     while(token!= NULL){
+	       strcat(tokenized, token);
+	       strcat(tokenized, " ");
+	       token = strtok(NULL, " ");
+	     }
+	    strlength = strlen(tokenized)+1;
 
 		// send the received string back to client
+		Write(sd2, tokenized, strlength);
 
 		close(sd2);
 }
