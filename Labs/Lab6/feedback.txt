@@ -6,7 +6,7 @@ pre1a: * Correct comments for the lines marked as ADD COMMENT HERE.
   * Redefined MYPORT above 8000.
   * write the code for a new function called printsin() according to the specifications below, uncomment the calls to printsin in recv_udp.c and build the executable.
 	Score: 17 / 20
-	Comment: Did not make because of the "restrict" keyword in the wrapper files.
+	Comment: Did not make because of the "restrict" keyword in the wrapper files. 
 
 problem1: 1. Modify getfile.c, fileserver.c, and getstats.c to use the wrapper functions with error checking that you have been building up over the semester.
   2. Create a Makefile to build the executables corresponding to the three C files given to you.
