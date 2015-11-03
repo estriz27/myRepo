@@ -30,10 +30,10 @@ dlisttest: $(SRC)/dlisttest.c $(OBJ)/dnode.o $(OBJ)/dlist.o
 $(OBJ)/allocator.o: allocator.h allocator.c 
 	$(CC) $(CFLAGS) -c $(SRC)/allocator.c -o $(OBJ)/allocator.o
 
-memory-test: $(SRC)/memory-test.c $(OBJ)/allocator.o
-	$(CC) $(CFLAGS) $(OBJ)/allocator.o -o $(BIN)/memory-test
+memory-test: $(SRC)/memory-test.c $(OBJ)/allocator.o $(OBJ)/dlist.o $(OBJ)/dnode.o
+	$(CC) $(CFLAGS) $(SRC)/memory-test.c $(OBJ)/allocator.o $(OBJ)/dlist.o $(OBJ)/dnode.o -o $(BIN)/memory-test
 
 .PHONY: clean
 clean:
-	/bin/rm -rf $(BIN)/* $(OBJ)/* $(DOC)/* core* *~
+	 /bin/rm -rf $(BIN)/* $(OBJ)/* core*
 

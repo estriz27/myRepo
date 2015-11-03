@@ -1,0 +1,7 @@
+Three helper functions were created for allocate.
+
+The first is firstFit(struct dlist *l, size_t size). This function creates a node, and then traverses the list given as a parameter. When it finds a node in the lsit whose size is large than the size given in the parameter, it returns this node. If no node is found it returns NULL.
+
+The second is bestFit(struct dlist *l, size_t size). This function two nodes, one used to traverse the list, and another as a temp. It also creates an integer to hold the maximum integer. It traverses the list checking for nodes that are larger than the size specified in the parameter, and smaller than the maximum integer. If both these criteria are met, it sets the temp node to this current node, and sets the max size to this size. By the end of the for loop it will have the node with the size closest to the size specified in the parameter. It returns this node. If no node is found it returns NULL.
+
+The third is worstFit(struct dlist *l, size_t size). This function creates two nodes, one used to traverse the list, and the second as a temp. It also creates an integer which is set ot 0. It traverses the list checking for nodes that are larger than the size specified in the parameter, and larger than the int. If both criteria are met, it sets the temp node tho this current node, and sets the min size to this size. By the end of the loop, it will have the node with the greatest size compared to the size specified in the parameter. It will return this node. If no node is found it returns NULL.

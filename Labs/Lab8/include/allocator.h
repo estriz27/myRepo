@@ -1,8 +1,8 @@
-
-#include <stddef.h>
 #ifndef _ALLOCATOR_H_
 #define _ALLOCATOR_H_
 
+#include <stddef.h>
+#include "dlist.h"
 
 
 int allocator_init(size_t size);

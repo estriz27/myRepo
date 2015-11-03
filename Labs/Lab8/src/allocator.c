@@ -31,36 +31,40 @@ void *allocate(size_t size, int type){
 	struct dnode* node;
 	if(type == 0){
 		node = firstFit(free_list,size);
-		if (node->data != '\0'){
+		if (node->data != NULL){
 			void *temp = node->data;
-			dlist_find_remove(free_list,node->data);
+			dlist_find_remove(free_list,temp);
 			dlist_add_back(allocated_list, temp);
+			return(temp);
 
 		}
-		else{
-			return NULL;
 
-		}
 	}
 	else if(type ==1){
 		node = bestFit(free_list, size);
-		if(node->data != '\0'){
+		if(node->data != NULL){
 			void *temp = node->data;
-			dlist_find_remove(free_list,node->data);
+			dlist_find_remove(free_list,temp);
 			dlist_add_back(allocated_list,temp);
+			return(temp);
 		}
+
 	}
 	else if(type ==2){
 		node = worstFit(free_list,size);
-		if(node->data != '\0'){
+		if(node->data != NULL){
 			void *temp = node->data;
-			dlist_find_remove(free_list,node->data);
+			dlist_find_remove(free_list,temp);
 			dlist_add_back(allocated_list,temp);
+			return(temp);
 		}
+
 	}
 	else{
-		printf("Please enter either 0, 1, or 2");
+		printf("Please enter either 0, 1, or 2");	
 		}
+		return NULL;
+
 	}
 	
 struct dnode* firstFit(struct dlist *l, size_t size){
