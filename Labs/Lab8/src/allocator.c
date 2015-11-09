@@ -21,55 +21,55 @@ int allocator_init(size_t size){
 		return -1;
 	}
 	else{
-		dlist_add_back(free_list, p);
+	  dlist_add_back(free_list, p,size);
 		return 0;
 	}
 
 }
 
 void *allocate(size_t size, int type){
-	struct dnode* node;
+  /*  printf("print:\n");
+	struct dnode* nodeA;
+	struct dnode* nodeB;
+	for(nodeA = dlist_iter_begin(free_list); nodeA!= NULL; nodeA = dlist_iter_next(free_list)){
+	  printf("%p\n",nodeA->data);
+	}
+	for(nodeB = dlist_iter_begin(allocated_list); nodeB!= NULL; nodeB = dlist_iter_next(allocated_list)){
+	  printf("%p\n",nodeB->data);
+	}*/
+
+  struct dnode* node = NULL;
 	if(type == 0){
 		node = firstFit(free_list,size);
-		if (node->data != NULL){
-			void *temp = node->data;
-			dlist_find_remove(free_list,temp);
-			dlist_add_back(allocated_list, temp);
-			return(temp);
-
-		}
 
 	}
 	else if(type ==1){
 		node = bestFit(free_list, size);
-		if(node->data != NULL){
-			void *temp = node->data;
-			dlist_find_remove(free_list,temp);
-			dlist_add_back(allocated_list,temp);
-			return(temp);
-		}
-
 	}
 	else if(type ==2){
 		node = worstFit(free_list,size);
-		if(node->data != NULL){
-			void *temp = node->data;
-			dlist_find_remove(free_list,temp);
-			dlist_add_back(allocated_list,temp);
-			return(temp);
-		}
-
 	}
 	else{
 		printf("Please enter either 0, 1, or 2");	
 		}
-		return NULL;
 
+	if (node != NULL){
+			void *temp = node->data;
+			dlist_add_back(allocated_list, temp,size);
+			dlist_add_back(free_list,temp + size, node->size - size);
+		      	dlist_find_remove(free_list,temp);
+			return(temp);
+
+		}
+		return NULL;
+		
 	}
+
 	
 struct dnode* firstFit(struct dlist *l, size_t size){
 	struct dnode* node;
 	for(node = dlist_iter_begin(l); node!= NULL; node = dlist_iter_next(l)){
+	  printf("looking at node, for size %zu, size is %zu\n", size, node->size);
 		if (node->size > size){
 			return node;
 		}
@@ -79,11 +79,13 @@ struct dnode* firstFit(struct dlist *l, size_t size){
 
 struct dnode* bestFit(struct dlist *l, size_t size){
 	struct dnode* node;
-	struct dnode* temp;
+	struct dnode* temp = NULL;
 	int currSize = INT_MAX;
 	printf("For loop started\n");
 	for(node = dlist_iter_begin(l); node!= NULL; node = dlist_iter_next(l)){
-		if (node->size > size && node->size < currSize){
+	  printf("looking at node, for size %zu, size is %zu\n", size, node->size);
+		if (node->size >= size && node->size < currSize){
+ 
 			temp = node;
 			currSize = temp->size;
 		}
@@ -105,6 +107,7 @@ struct dnode* worstFit(struct dlist *l, size_t size){
 	struct dnode *temp;
 	int currSize = 0;
 	for(node = dlist_iter_begin(l); node!= NULL; node = dlist_iter_next(l)){
+	  printf("looking at node, for size %zu, size is %zu\n", size, node->size);
 		if(node->size > size && node->size > currSize){
 			temp = node;
 			currSize = temp->size;
@@ -112,9 +115,11 @@ struct dnode* worstFit(struct dlist *l, size_t size){
 		}
 	}
 		if(temp!= NULL){
+		  printf("returned pointer\n");
 			return temp;
 		}
 		else{
+		  printf("returned null\n");
 			return NULL;
 		}
 
@@ -124,7 +129,7 @@ int deallocate(void *ptr){
 	struct dnode *node;
 	for(node = dlist_iter_begin(allocated_list);node!= NULL; node = dlist_iter_next(allocated_list)){
 		if(node->data == ptr){
-			dlist_add_back(free_list,node);
+		  dlist_add_back(free_list,node,node->size);
 			dlist_find_remove(allocated_list,node);
 			return 0;
 		}
