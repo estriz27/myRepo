@@ -22,8 +22,8 @@ files should include wrappers for the following functions: fork(2), pipe(2),
 wait(2), waitpid(2), open(2), close(2), write(2), read(2), connect(2),
 bind(2), listen(2), accept(2), and any others you use in this lab which set
 the errno variable when encountering an error condition.
-	Score: 0 / 10
-	Comment: No Submission
+	Score: 10 / 10
+	Comment: Good
 
 Problem 2: You will need to turn in a Makefile that generates all the objects and the
 executables for this lab assignment. (This includes a rule for building
@@ -52,6 +52,6 @@ identical to what you see in your solution to Problem 3.
 	Comment: Incorrect output
 
 ------------------------------------------------------------
-TOTAL 83.0 / 100
+TOTAL 93.0 / 100
 ------------------------------------------------------------
 
