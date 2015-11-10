@@ -1,0 +1,30 @@
+Elias Strizower
+CSCI 315 Lab 9 Answers.txt
+
+1.1. Both internal and external fragmentation are possible. The allocator can fragment the bits of memory into pieces that are too small to be used and are non-contiguous (external fragmentation). Internal fragmentation can be caused if the user tries to allocate chunks that are larger than needed. 
+
+1.2. Completion of allocate/deallocate - How often they return NULL. The more times it returns NULL, the less effective it is at allocating/deallocating
+Time of allocate/deallocate - The faster the more efficient the program is
+
+1.3
+
+double average_frag() {
+int nodes ; (number of nodes)
+int space; (amount of free space)
+create for loop to calculate the amount of space in free_list
+int avg_frag = space/nodes;
+return avg_frag;
+
+2.1
+
+The issue with the pseudocode provided is that is deallocates everytime that something is allocated. In able to make the pseudocode a more realistic representation of fragmentation, deallocate should not be called everytime. Also, r should be incremented so the while loop is not infinite.
+
+srandom(seed);
+int r = 0;
+voi *p = NULL;
+while (r<requests){
+      s = a random number between 100 & 1000;
+      p = allocate(algorithm, s);
+      if (r >=500){
+      deallocate(p);
+      }
