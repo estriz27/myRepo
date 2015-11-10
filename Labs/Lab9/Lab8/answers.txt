@@ -1,0 +1,16 @@
+Elias Strizower
+CSCI 315 Lab 8
+answers.txt
+
+1. A segmentation fault occurs when a program refers to a segment number which refers to an illegal memory location.
+2. Pros: Easy to store and manage data.
+		 Easy to traverse.
+   Cons: Have to keep track of a lot of data (ie. what is in front and behind a current node)
+3. Malloc causes the operating system to search for an unallocated portion of memory, so it can then return that free memory to the process. That memory is then marked with its availability set to 0. Free does the opposite. It will deallocate memory that belonged to a process in order to free it. That memory is then referred to in a list of free memory.
+Doubly linked lists are efficient for a custom memory allocator because they are very easy to traverse in able to find information. 
+Another data structure that may work well is a binary tree. This will be good because it will organize the memory by size and make it easy to find either the correct size of free memory, or the correct process to be freed.
+4. External fragmentation is when there is enough total memory to allocate to a process, but since they are not contiguous there isn't a block large enough to be allocated. This can be caused by first-fit and best-fit strategies.
+5. Internal fragmentation is unused memory that is internal to a partition. This is caused by the memory allocated to a process being slighly larger than the amount requested.
+6. First fit is when memory is allocated to the first block size that is large enough for the given process. This can cause both external and internal fragmentation, though it is fast.
+7. Best-fit allocates the smallest hole that is big enough. It reduces internal fragmentation, but it is slower than first-fit. 
+8. Worst-fit allocates the largest hole. This produces the largest leftover hole, which reduces fragmentation.
