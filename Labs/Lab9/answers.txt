@@ -28,3 +28,5 @@ while (r<requests){
       if (r >=500){
       deallocate(p);
       }
+
+2.2. It turns out that my first-fit had the best results of the three and minimized fragmentation. This is surprising because I was expecting best fit to perform the best, because it leaves the least amount of memory left over, and should cause the least fragmentation. The mean values for first fit and best fit were actually extremely close. Given a larger sample size I believe that best fit would perform better.
