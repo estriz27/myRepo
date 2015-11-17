@@ -1,3 +1,7 @@
+//Elias Strizower
+//CSCI 315
+//Lab 10
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "wrappers.h"
@@ -9,9 +13,9 @@
 
 #define MAX_ARGS 20
 
-
+//Added exit functionality. If "exit" is typed into the shell, it will exit the ishell process.
 int tokenizer(char *string, char *array[], char *d){
-  int count = 1;
+  int count = 0;
 
   char *token; 
   token = strtok(string, d);
@@ -20,10 +24,11 @@ int tokenizer(char *string, char *array[], char *d){
 
   while (token != NULL && count< MAX_ARGS-1){
     token = strtok(NULL, d);
-    array[count] = token;
     count ++;
+    array[count] = token;
+    
   }
-  array[count] = NULL;
+  array[count+1] = NULL;
 
   return count;
 
@@ -40,6 +45,9 @@ void cmd_exe(char **args){
 
   else {
     wait(&status);
+    if (status == 0){
+      printf("[ishell: program terminated successfully]\n");
+    }
   }
 }
 
@@ -50,6 +58,8 @@ int main(int argc, char *argv[]){
   char *lines[MAX_ARGS];
   char *args[MAX_ARGS];
   int count = 0;
+  int space = 0;
+
 
   printf("ishell> "); 
   gets(line);
@@ -57,18 +67,35 @@ int main(int argc, char *argv[]){
 
   while(1){
 
-  count = tokenizer(line, lines, ";");
+    count = tokenizer(line, lines, ";");
 
-  for (int i =0; i< count; i++){
-    tokenizer(lines[i], args, " ");
-    cmd_exe(args);
-  }
+    for (int i =0; i< count; i++){
+      tokenizer(lines[i], args, " ");
+
+      if(space == 1 && args[i] == NULL){
+        args[0] = "ls";
+        cmd_exe(args);
+
+        space = 0;
+        break;
+      }
+
+      if(args[i] == NULL){
+        space ++;
+      }
+      if (strcmp(args[0],"exit") == 0){
+        exit(0);
+      }
+
+
+      cmd_exe(args);
+    }
 
     printf("ishell> ");
     gets(line);
 
-    }
   }
+}
 
 
 
