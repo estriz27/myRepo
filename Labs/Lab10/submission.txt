@@ -1,0 +1,10 @@
+Elias Strizower
+CSCI 315
+Lab 10
+
+
+problem 1: Works to specification
+problem 2: Works to specification
+problem 3: Works to specification
+problem 4: Works to specification
+problem 5: Works to specification
