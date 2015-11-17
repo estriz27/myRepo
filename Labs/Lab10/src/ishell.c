@@ -3,8 +3,11 @@
 #include "wrappers.h"
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdbool.h>
 
 char *args[20];
+bool boolean = true;
+
 
 char **tokenizer(char *string){
   int count = 1;
@@ -30,30 +33,30 @@ int main(int argc, char *argv[]){
   char line[200];
 	int pid;
 	int status; // exit status to be filled by wait
-//  size_t n = 200;
+
+ 
+  
 
                                                                                                                                                                              
 	printf("ishell> "); 
   //getline(&line, &n, stdin);
   gets(line);
+
   while(1){
   tokenizer(line); 
                                                                                                                                                                
   	//child process
   	if ((pid = Fork()) == 0) {
 
-  	 execvp(args[0], args);
-  	 exit(0);
-  	}
-
-
+      Execvp(args[0], args); 
+	    exit(0);
+	   }
 
   	//parent process
   	else {
-  		
-
   	wait(&status); // note we are not catching the return value of wait!
  // 	printf("parent got termination status= %d from child\n", status);
+
   	printf("ishell> ");
 	  gets(line);
 
