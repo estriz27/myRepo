@@ -5,64 +5,71 @@
 #include <fcntl.h>
 #include <stdbool.h>
 
-char *args[20];
-bool boolean = true;
 
 
-char **tokenizer(char *string){
+#define MAX_ARGS 20
+
+
+int tokenizer(char *string, char *array[], char *d){
   int count = 1;
 
   char *token; 
-  token = strtok(string," ");
-  args[0] = token;  
+  token = strtok(string, d);
 
-  while (token != NULL){
-    token = strtok(NULL, " ");
-    args[count] = token;
+  array[0] = token;  
+
+  while (token != NULL && count< MAX_ARGS-1){
+    token = strtok(NULL, d);
+    array[count] = token;
     count ++;
   }
-  args[count] = NULL;
+  array[count] = NULL;
 
-
-  return args;
+  return count;
 
 }
+
+void cmd_exe(char **args){
+
+  int pid;
+  int status;
+
+  if((pid = Fork()) == 0){
+    Execvp(args[0], args);
+  }
+
+  else {
+    wait(&status);
+  }
+}
+
 
 
 int main(int argc, char *argv[]){
   char line[200];
-	int pid;
-	int status; // exit status to be filled by wait
+  char *lines[MAX_ARGS];
+  char *args[MAX_ARGS];
+  int count = 0;
 
- 
-  
-
-                                                                                                                                                                             
-	printf("ishell> "); 
-  //getline(&line, &n, stdin);
+  printf("ishell> "); 
   gets(line);
 
+
   while(1){
-  tokenizer(line); 
-                                                                                                                                                               
-  	//child process
-  	if ((pid = Fork()) == 0) {
 
-      Execvp(args[0], args); 
-	    exit(0);
-	   }
+  count = tokenizer(line, lines, ";");
 
-  	//parent process
-  	else {
-  	wait(&status); // note we are not catching the return value of wait!
- // 	printf("parent got termination status= %d from child\n", status);
-
-  	printf("ishell> ");
-	  gets(line);
-
-	
-
-  	}
+  for (int i =0; i< count; i++){
+    tokenizer(lines[i], args, " ");
+    cmd_exe(args);
   }
-}
+
+    printf("ishell> ");
+    gets(line);
+
+    }
+  }
+
+
+
 
