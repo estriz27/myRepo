@@ -20,11 +20,11 @@
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 # compiler
-CC = gcc
+CC = gcc 
 
 CFLAGS = -g -Wall
 
-EXE = file_stat read_dir
+EXE = file_stat read_dir fdump
 
 all: $(EXE)
 
@@ -39,6 +39,12 @@ read_dir: read_dir.o
 
 read_dir.o: read_dir.c
 	$(CC) -c $(CFLAGS) read_dir.c
+
+hexdump.o: hexdump.c hexdump.h
+	$(CC) $(CFLAGS) -c hexdump.c -o hexdump.o
+
+fdump:  
+	$(CC) $(CFLAGS) hexdump.o fdump.c -o fdump
 
 clean:
 	/bin/rm -f *~ *.o core $(EXE)
