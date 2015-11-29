@@ -1,0 +1,15 @@
+------------------------------------------------------------
+Lab10 feedback for Strizower, Elias B. (ebs021)
+------------------------------------------------------------
+Problem 1: ishell: The general idea is that in your ishell.c, your code will spawn a new child
+and the child calls one of the exec functions to execute the command. In the
+mean time, the parent process will wait for the child to complete. When the
+parent knows that the child is done, it displays the shell’s prompt again and
+waits for the user to type another command.
+	Score: 28 / 30
+	Comment: Missing wrapper files
+
+------------------------------------------------------------
+TOTAL 28.0 / 100
+------------------------------------------------------------
+

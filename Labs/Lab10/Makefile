@@ -17,7 +17,7 @@ all: $(EXECS)
 doc:
 	doxygen
 
-$(OBJ)/wrappers.o: wrappers.c wrappers.h
+$(OBJ)/wrappers.o: $(SRC)/wrappers.c $(SRC)/wrappers.h
 	$(CC) $(CFLAGS) -c $(SRC)/wrappers.c -o $(OBJ)/wrappers.o
 
 ishell: $(SRC)/ishell.c $(OBJ)/wrappers.o 
